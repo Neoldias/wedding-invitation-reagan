@@ -1,0 +1,1806 @@
+/* ==========================================================================
+   MINITA WEDDING - LUXURY DIGITAL WEDDING INVITATION DESIGN SYSTEM
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+    --color-lavender-dark: #0d261a;
+    --color-lavender: #1b5336;
+    --color-lavender-light: #2d6a4f;
+
+    --color-sage-dark: #0d261a;
+    --color-sage: #1b5336;
+    --color-sage-light: #2d6a4f;
+
+    --color-gold-deep: #B8860B;
+    --color-gold: #D4AF37;
+    --color-gold-light: #F3E5AB;
+    --color-champagne: #F4FAF6;
+    --color-ivory: #FDFBFE;
+    --color-cream: #EAF4EE;
+    --color-rose-gold: #B76E79;
+    --color-text-dark: #123322;
+    --color-text-muted: #4e6154;
+    --color-text-light: #FAF4FA;
+
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-script: 'Great Vibes', cursive;
+    --font-sans: 'Montserrat', sans-serif;
+
+    --shadow-sm: 0 4px 12px rgba(13, 38, 26, 0.08);
+    --shadow-md: 0 8px 24px rgba(13, 38, 26, 0.12);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.2);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.35);
+
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+
+    --transition-fast: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-curtain: 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Base Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background-color: var(--color-sage-dark);
+}
+
+body {
+    font-family: var(--font-serif);
+    color: var(--color-text-dark);
+    background-color: var(--color-champagne);
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Mobile Frame Container */
+.app-viewport {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    background-color: var(--color-ivory);
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* Falling Roce / Rose Petals Canvas Overlay */
+.rose-petals-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 500;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-champagne);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gold);
+    border-radius: 3px;
+}
+
+/* ==========================================================================
+   ENVELOPE & DOOR OPENING OVERLAY
+   ========================================================================== */
+#envelope-overlay.green-door-overlay {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    overflow: hidden;
+    background: #ede8df;
+    perspective: 1400px;
+}
+
+#envelope-overlay.hidden {
+    display: none !important;
+}
+
+/* Outer Wall & Architectural Scene Container */
+.entrance-scene-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #f5f1e8 0%, #e5ded2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Side Wooden Trellis Lattice Frames */
+.side-trellis {
+    position: absolute;
+    top: 40px;
+    bottom: 120px;
+    width: 58px;
+    z-index: 1;
+    border: 3px solid #6b4423;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.trellis-left {
+    left: 10px;
+}
+
+.trellis-right {
+    right: 10px;
+}
+
+.trellis-lattice {
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(45deg, #6b4423 0px, #6b4423 3px, transparent 3px, transparent 20px),
+        repeating-linear-gradient(-45deg, #6b4423 0px, #6b4423 3px, transparent 3px, transparent 20px);
+    opacity: 0.85;
+}
+
+/* Potted Cedar Trees & Wooden Planter Boxes */
+.side-planter {
+    position: absolute;
+    bottom: 20px;
+    width: 75px;
+    z-index: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.planter-left {
+    left: 4px;
+}
+
+.planter-right {
+    right: 4px;
+}
+
+.evergreen-tree {
+    position: relative;
+    width: 60px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tree-foliage {
+    background: linear-gradient(135deg, #2d6a4f, #1b4332);
+    border-radius: 50% 50% 40% 40%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.foliage-top {
+    width: 32px;
+    height: 45px;
+    margin-bottom: -15px;
+    z-index: 3;
+}
+
+.foliage-mid {
+    width: 44px;
+    height: 55px;
+    margin-bottom: -15px;
+    z-index: 2;
+}
+
+.foliage-bot {
+    width: 54px;
+    height: 65px;
+    z-index: 1;
+}
+
+.wooden-planter-box {
+    width: 68px;
+    height: 60px;
+    background: linear-gradient(180deg, #6b4423, #4a2d15);
+    border: 3px solid #361f0c;
+    border-radius: 4px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.wooden-planter-box::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Top Architrave / Molding Header Beam */
+.door-header-beam {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    right: 70px;
+    height: 55px;
+    background: linear-gradient(180deg, #0b291d 0%, #154534 60%, #0d2e22 100%);
+    border-bottom: 3px solid #081e15;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    z-index: 15;
+}
+
+.header-beam-molding {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    right: -10px;
+    height: 18px;
+    background: #092117;
+    border-bottom: 2px solid #D4AF37;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D PERSPECTIVE DOOR WRAPPER */
+.door-perspective-wrapper {
+    position: absolute;
+    top: 55px;
+    bottom: 15px;
+    left: 75px;
+    right: 75px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
+}
+
+/* ------------------------------------------------------------------------
+   FOREST GREEN WOODEN DOOR PANELS (LEFT & RIGHT)
+   ------------------------------------------------------------------------ */
+.door-panel {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 2;
+    transform-style: preserve-3d;
+    transition: transform 1.4s cubic-bezier(0.7, 0, 0.15, 1);
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent 25%, transparent 75%, rgba(0, 0, 0, 0.4)),
+        linear-gradient(180deg, #18523f 0%, #0e382b 50%, #09241b 100%),
+        url('assets/green_wooden_door.jpg') center/cover no-repeat;
+    background-blend-mode: multiply, normal, overlay;
+    box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 8px 30px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.door-left {
+    left: 0;
+    transform-origin: left center;
+    border-right: 2px solid #D4AF37;
+    box-shadow: inset -2px 0 10px rgba(212, 175, 55, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.7);
+}
+
+.door-right {
+    right: 0;
+    transform-origin: right center;
+    border-left: 2px solid #D4AF37;
+    box-shadow: inset 2px 0 10px rgba(212, 175, 55, 0.4), inset 0 0 35px rgba(0, 0, 0, 0.7);
+}
+
+.green-wood-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 2px, transparent 2px, transparent 8px);
+    pointer-events: none;
+}
+
+/* Molded Recessed Panels (matching reference photo) */
+.carved-panel {
+    width: 84%;
+    border-radius: 6px;
+    border: 3.5px solid #09261c;
+    outline: 1.5px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        inset 4px 4px 12px rgba(0, 0, 0, 0.9),
+        inset -2px -2px 8px rgba(255, 255, 255, 0.15),
+        0 4px 15px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(135deg, rgba(20, 60, 45, 0.6), rgba(5, 20, 15, 0.8));
+    position: relative;
+    pointer-events: none;
+}
+
+.panel-top-left,
+.panel-top-right {
+    height: 44%;
+    margin-top: 40px;
+}
+
+.panel-bottom-left,
+.panel-bottom-right {
+    height: 32%;
+    margin-bottom: 50px;
+}
+
+/* Brass Hinges */
+.brass-hinge {
+    position: absolute;
+    width: 12px;
+    height: 48px;
+    background: linear-gradient(90deg, #8a6410, #ffd700 40%, #d4af37 70%, #614408);
+    border: 1px solid #361f0c;
+    border-radius: 3px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    z-index: 6;
+}
+
+.door-left .hinge-top {
+    top: 60px;
+    left: 2px;
+}
+
+.door-left .hinge-bottom {
+    bottom: 60px;
+    left: 2px;
+}
+
+.door-right .hinge-top {
+    top: 60px;
+    right: 2px;
+}
+
+.door-right .hinge-bottom {
+    bottom: 60px;
+    right: 2px;
+}
+
+/* Brass Handle Plates */
+.door-handle-plate {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 85px;
+    background: linear-gradient(135deg, #d4af37, #997a15 60%, #ffd700 100%);
+    border: 1.5px solid #fff5d6;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    z-index: 12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.handle-left {
+    right: 6px;
+}
+
+.handle-right {
+    left: 6px;
+}
+
+.handle-knob {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fffdf9, #b8860b 80%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+/* ------------------------------------------------------------------------
+   DOOR TOP HEADER (WEDDING INVITATION & COUPLE NAME ABOVE TAP BUTTON)
+   ------------------------------------------------------------------------ */
+.door-top-header {
+    position: absolute;
+    top: 95px;
+    width: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-left {
+    right: 30px;
+    text-align: right;
+    padding-right: 12px;
+}
+
+.header-right {
+    left: 30px;
+    text-align: left;
+    padding-left: 12px;
+}
+
+.door-invite-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #FFFDF9 0%, #D4AF37 50%, #B8860B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
+.door-couple-title {
+    font-family: var(--font-script);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #FFF5D6;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.95), 0 0 15px rgba(212, 175, 55, 0.6);
+    line-height: 1.1;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+/* Natural Wreath Crest Top Badge */
+.center-wreath-crest {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.8s ease;
+}
+
+.wreath-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 2px dashed rgba(212, 175, 55, 0.6);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.wreath-leaf {
+    font-size: 0.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.crest-emblem-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #FFFDF9, #D4AF37 60%, #705106 100%);
+    border: 2px solid #FFF5D6;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 15px rgba(212, 175, 55, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crest-letters {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #211006;
+    letter-spacing: 1px;
+}
+
+/* ------------------------------------------------------------------------
+   CENTER "TAP TO OPEN" GOLDEN SEAL (IN THE MIDDLE OF THE DOOR)
+   ------------------------------------------------------------------------ */
+.seal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+}
+
+.seal-container:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.gold-seal-glow-ring {
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 2px dashed rgba(212, 175, 55, 0.75);
+    animation: rotateRing 16s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotateRing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.gold-seal {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFFDF9 0%, #F3E5AB 25%, #D4AF37 65%, #735308 100%);
+    border: 4px solid #FFFDF9;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85), 0 0 30px rgba(212, 175, 55, 0.7), inset 0 2px 8px rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    text-align: center;
+    animation: sealPulse 2.5s infinite ease-in-out;
+}
+
+.seal-crest-icon {
+    font-size: 1.3rem;
+    color: #3d2012;
+    margin-bottom: 2px;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.5));
+}
+
+.seal-title {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #211006;
+    margin-top: 2px;
+}
+
+.seal-subtitle {
+    font-family: var(--font-script);
+    font-size: 1.1rem;
+    color: #4a2c17;
+    margin-top: 2px;
+}
+
+@keyframes sealPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 14px 45px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.85);
+    }
+}
+
+/* ------------------------------------------------------------------------
+   3D DOOR OPENING ANIMATIONS
+   ------------------------------------------------------------------------ */
+#envelope-overlay.opened .door-left {
+    transform: rotateY(-110deg);
+    box-shadow: inset -20px 0 50px rgba(0, 0, 0, 0.9);
+}
+
+#envelope-overlay.opened .door-right {
+    transform: rotateY(110deg);
+    box-shadow: inset 20px 0 50px rgba(0, 0, 0, 0.9);
+}
+
+#envelope-overlay.opened .seal-container {
+    transform: translate(-50%, -50%) scale(0) rotate(180deg);
+    opacity: 0;
+}
+
+#envelope-overlay.opened .center-wreath-crest {
+    transform: translate(-50%, -90px) scale(0);
+    opacity: 0;
+}
+
+#envelope-overlay.opened {
+    background: transparent;
+    pointer-events: none;
+    transition: background 1.2s ease;
+}
+
+/* Opened State Animation */
+#envelope-overlay.opened .envelope-half-top {
+    transform: translateY(-100%);
+}
+
+#envelope-overlay.opened .envelope-half-bottom {
+    transform: translateY(100%);
+}
+
+#envelope-overlay.opened .seal-container {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#envelope-overlay.hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   HEADER & FLOATING AUDIO CONTROLS
+   ========================================================================== */
+.music-toggle-btn {
+    position: fixed;
+    bottom: 24px;
+    right: calc(50% - 220px);
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-sage-dark);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+@media (max-width: 480px) {
+    .music-toggle-btn {
+        right: 16px;
+    }
+}
+
+.music-toggle-btn:hover {
+    transform: scale(1.1);
+    background: var(--color-sage);
+}
+
+.music-toggle-btn.playing {
+    animation: spinRecord 4s linear infinite;
+}
+
+@keyframes spinRecord {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Language Switcher */
+.lang-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-gold);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--color-sage-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   SECTION 1: HERO CONTAINER
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 580px;
+    background-color: var(--color-champagne);
+    background-image: url('assets/assets/hero_fountain_arch.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 90px 24px 40px 24px;
+    text-align: center;
+}
+
+.hero-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(250, 244, 250, 0.85) 0%,
+            rgba(250, 244, 250, 0.45) 40%,
+            rgba(250, 244, 250, 0.95) 100%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+.hero-sub-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-sage-dark);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.hero-sub-title::before,
+.hero-sub-title::after {
+    content: '♡';
+    font-size: 0.9rem;
+    color: var(--color-gold);
+}
+
+/* Bible Verse & Parents Card */
+.bible-verse {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-sage-dark);
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(4px);
+    border-left: 3px solid var(--color-gold);
+    padding: 10px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 12px;
+    display: inline-block;
+    box-shadow: var(--shadow-sm);
+}
+
+.verse-ref {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--color-gold-deep);
+    margin-top: 4px;
+}
+
+.parents-invitation-card {
+    margin: 16px 0;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(6px);
+}
+
+.parents-names {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--color-sage-dark);
+}
+
+.parents-location {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--color-gold-deep);
+    margin-top: 2px;
+}
+
+.invite-lead-text {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+.couple-title-group {
+    margin: 16px 0 20px 0;
+}
+
+.groom-name,
+.bride-name {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--color-sage-dark);
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.ampersand {
+    font-family: var(--font-script);
+    font-size: 2.4rem;
+    color: var(--color-gold-deep);
+    margin: 4px 0;
+    display: block;
+}
+
+.lineage-info {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-top: 6px;
+}
+
+.profession-tag {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--color-sage-dark);
+    margin-top: 2px;
+}
+
+.invitation-body-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--color-text-dark);
+    line-height: 1.7;
+    margin: 28px 12px 10px 12px;
+    padding: 16px;
+    border-top: 1px solid rgba(212, 175, 55, 0.4);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   SECTION 2: SCRATCH TO REVEAL DATE CARD
+   ========================================================================== */
+.reveal-section {
+    position: relative;
+    width: 100%;
+    min-height: 580px;
+    background-color: var(--color-champagne);
+    background-image: url('assets/assets/hero_fountain_archd.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 90px 24px 40px 24px;
+    text-align: center;
+}
+
+/* .reveal-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(250, 244, 250, 0.85) 0%,
+            rgba(250, 244, 250, 0.862) 40%,
+            rgba(250, 244, 250, 0.95) 100%);
+    pointer-events: none;
+} */
+
+.scratch-section {
+    padding: 30px 24px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.977) 0%,
+            rgba(215, 253, 215, 0.862) 40%,
+            rgba(250, 244, 250, 0.958) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-sage);
+    margin-bottom: 20px;
+}
+
+.scratch-card-wrapper {
+    position: relative;
+    /* width: 100%; */
+    width: 325px;
+    height: 325px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 2px solid var(--color-gold);
+    background: #FFFDF9;
+}
+
+/* Hidden Card Content revealed beneath scratch foil */
+.scratch-revealed-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+    background: radial-gradient(circle at center, var(--color-ivory) 0%, var(--color-cream) 100%);
+}
+
+.reveal-heart-icon {
+    font-size: 2.2rem;
+    color: var(--color-rose-gold);
+    margin-bottom: 4px;
+    animation: heartBeat 1.8s infinite ease-in-out;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.reveal-heading {
+    font-family: var(--font-script);
+    font-size: 2rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 4px;
+}
+
+.reveal-date-main {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-sage-dark);
+    letter-spacing: 1px;
+}
+
+.reveal-time-sub {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+}
+
+/* Canvas Scratch Overlay */
+#scratch-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    cursor: grab;
+    touch-action: none;
+}
+
+#scratch-canvas:active {
+    cursor: grabbing;
+}
+
+.save-date-btn-wrapper {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 100%);
+    color: var(--color-gold-light);
+    border: 1px solid var(--color-gold);
+    padding: 12px 28px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+/* ==========================================================================
+   SECTION 3: PHOTO GALLERY CAROUSEL
+   ========================================================================== */
+.gallery-section {
+    padding: 30px 20px;
+    background: var(--color-ivory);
+}
+
+.section-title-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-title-center h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--color-sage-dark);
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    aspect-ratio: 4 / 3;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--color-gold);
+    color: var(--color-sage-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background var(--transition-fast);
+}
+
+.carousel-nav-btn:hover {
+    background: #FFF;
+}
+
+.carousel-nav-prev {
+    left: 10px;
+}
+
+.carousel-nav-next {
+    right: 10px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active {
+    background: var(--color-gold);
+    transform: scale(1.25);
+}
+
+/* ==========================================================================
+   SECTION 4: COUNTDOWN TIMER
+   ========================================================================== */
+.countdown-section {
+    padding: 36px 20px;
+    background: linear-gradient(180deg, var(--color-sage-dark) 0%, var(--color-sage) 100%);
+    color: var(--color-champagne);
+    text-align: center;
+}
+
+.countdown-title {
+    font-family: var(--font-script);
+    font-size: 2.2rem;
+    color: var(--color-gold-light);
+    margin-bottom: 20px;
+}
+
+.timer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+.timer-block {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-number {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1;
+}
+
+.timer-label {
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-champagne);
+    margin-top: 6px;
+    opacity: 0.85;
+}
+
+/* ==========================================================================
+   SECTION 5: PROGRAM TIMELINE & SCHEDULE
+   ========================================================================== */
+.timeline-section {
+    padding: 40px 24px;
+    background: var(--color-champagne);
+}
+
+/* ==========================================================================
+   SECTION 5: PROGRAM TIMELINE CARDS DESIGN
+   ========================================================================== */
+.timeline-section {
+    padding: 40px 20px;
+    background: var(--color-champagne);
+}
+
+.timeline-section-subtitle {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.timeline-day-block {
+    margin-top: 28px;
+}
+
+.timeline-day-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.day-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    background: rgba(27, 83, 54, 0.08);
+    color: var(--color-sage-dark);
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(27, 83, 54, 0.2);
+}
+
+.day-badge.gold {
+    background: rgba(212, 175, 55, 0.15);
+    color: var(--color-gold-deep);
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+.day-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    color: var(--color-sage-dark);
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.timeline-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.timeline-card.luxury-card {
+    background: #FFFDF9;
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.timeline-card.luxury-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: linear-gradient(90deg, var(--color-gold-light), var(--color-gold), var(--color-gold-light));
+}
+
+.timeline-card.luxury-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gold);
+}
+
+.timeline-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.event-icon-wrapper {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.event-icon-wrapper.roce-icon {
+    background: #EBF5EF;
+    color: #1B5336;
+    border: 1px solid #B8DCAB;
+}
+
+.event-icon-wrapper.church-icon {
+    background: #FFF9E6;
+    color: #B8860B;
+    border: 1px solid #F3E5AB;
+}
+
+.event-icon-wrapper.reception-icon {
+    background: #FDF0F2;
+    color: #B76E79;
+    border: 1px solid #F5C6CB;
+}
+
+.event-time-badge {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-sage-dark);
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.5px;
+}
+
+.timeline-event-name {
+    font-family: var(--font-heading);
+    font-size: 1.22rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.timeline-venue {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.timeline-venue i {
+    color: var(--color-gold-deep);
+    font-size: 0.95rem;
+    margin-top: 2px;
+}
+
+.timeline-event-desc {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    border-top: 1px dashed rgba(212, 175, 55, 0.3);
+    padding-top: 10px;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   SECTION 6: VENUE & GOOGLE MAPS
+   ========================================================================== */
+.venue-map-section {
+    position: relative;
+    width: 100%;
+    min-height: 580px;
+    background-color: var(--color-champagne);
+    background-image: url('assets/assets/hero_fountain_archs.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 90px 24px 40px 24px;
+    text-align: center;
+}
+
+.venue-section {
+    padding: 40px 24px;
+    background: var(--color-ivory);
+    text-align: center;
+}
+
+.venue-card {
+    background: var(--color-champagne);
+    border: 1px solid var(--color-gold);
+    border-radius: var(--radius-md);
+    padding: 24px 16px;
+    margin-top: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.venue-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 4px;
+}
+
+.venue-address {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 16px;
+}
+
+.map-wrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    margin-bottom: 16px;
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--color-sage-dark);
+    border: 1px solid var(--color-sage-dark);
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background: var(--color-sage-dark);
+    color: var(--color-champagne);
+}
+
+/* ==========================================================================
+   SECTION 7: DRESS CODE & PRE-WEDDING EVENTS
+   ========================================================================== */
+.info-cards-section {
+    padding: 36px 20px;
+    background: var(--color-champagne);
+}
+
+.grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.info-card {
+    background: var(--color-ivory);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: var(--radius-sm);
+    padding: 16px 12px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-card-icon {
+    font-size: 1.5rem;
+    color: var(--color-gold-deep);
+    margin-bottom: 6px;
+}
+
+.info-card-title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-sage-dark);
+    margin-bottom: 4px;
+}
+
+.info-card-desc {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   SECTION 8: RSVP FORM
+   ========================================================================== */
+.rsvp-section {
+    padding: 40px 24px;
+    background: var(--color-ivory);
+    text-align: center;
+}
+
+.rsvp-form {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-sage-dark);
+    margin-bottom: 6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--color-text-dark);
+    background: var(--color-champagne);
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.form-submit-btn {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* Modal Toast Notification */
+.toast-msg {
+    display: none;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    background: var(--color-sage-dark);
+    color: var(--color-gold-light);
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   FOOTER & ANIMATED CORNER FLORALS
+   ========================================================================== */
+.main-footer {
+    position: relative;
+    padding: 45px 20px 35px;
+    background: var(--color-sage-dark);
+    color: var(--color-champagne);
+    text-align: center;
+    border-top: 2px solid var(--color-gold);
+    overflow: hidden;
+}
+
+.footer-content-container {
+    position: relative;
+    z-index: 5;
+}
+
+.footer-floral-corner {
+    position: absolute;
+    bottom: -6px;
+    width: 145px;
+    height: 145px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.footer-floral-corner.left-corner {
+    left: -6px;
+}
+
+.footer-floral-corner.right-corner {
+    right: -6px;
+    transform: scaleX(-1);
+}
+
+.footer-floral-corner svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Corner Flowers Micro-Animations */
+.pulse-bloom {
+    animation: floralPulse 3.5s ease-in-out infinite alternate;
+    transform-origin: 42px 138px;
+}
+
+.pulse-bloom-inner {
+    animation: floralPulseInner 3.5s ease-in-out infinite alternate;
+    transform-origin: 42px 138px;
+}
+
+.sway-leaf-1 {
+    animation: leafSway 4s ease-in-out infinite alternate;
+    transform-origin: bottom left;
+}
+
+.sway-leaf-2 {
+    animation: leafSway 5s ease-in-out 1s infinite alternate-reverse;
+    transform-origin: bottom left;
+}
+
+.side-blossom {
+    animation: sideBlossomPulse 3s ease-in-out infinite alternate;
+    transform-origin: 85px 118px;
+}
+
+.sparkle-star-1 {
+    animation: sparkleTwinkle 2.5s ease-in-out infinite alternate;
+}
+
+.sparkle-star-2 {
+    animation: sparkleTwinkle 3s ease-in-out 0.8s infinite alternate-reverse;
+}
+
+@keyframes floralPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.85;
+    }
+
+    100% {
+        transform: scale(1.08);
+        opacity: 1;
+        filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6));
+    }
+}
+
+@keyframes floralPulseInner {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.12) rotate(15deg);
+    }
+}
+
+@keyframes leafSway {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(8deg);
+    }
+}
+
+@keyframes sideBlossomPulse {
+    0% {
+        transform: scale(0.92);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+@keyframes sparkleTwinkle {
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.3);
+        filter: drop-shadow(0 0 4px #D4AF37);
+    }
+
+    100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+}
+
+.footer-script {
+    font-family: var(--font-script);
+    font-size: 2.4rem;
+    color: var(--color-gold);
+}
+
+.footer-sub {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+.footer-blessing {
+    font-family: var(--font-serif);
+    font-size: 0.92rem;
+    color: var(--color-gold-light);
+    margin-top: 14px;
+    font-style: italic;
+}
+
+.footer-thank-you {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    color: var(--color-champagne);
+}
+
+.developer-credit {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    opacity: 0.8;
+    margin-top: 14px;
+    line-height: 1.4;
+}
+
+.copyright-text {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    opacity: 0.65;
+    margin-top: 6px;
+}
+
+.insta-link {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    margin-top: 6px;
+}
+
+.insta-link a {
+    color: var(--color-gold);
+    text-decoration: underline;
+}
